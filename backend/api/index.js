@@ -21,20 +21,14 @@ mongoose
 const __dirname = path.resolve();
 const app = express();
 
-// CORS configuration
-const corsOptions = {
-  origin: 'https://blog-blast-v2-frontend.vercel.app/', // Remove trailing slash
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-};
 
-app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors())
 
 // Simple route to test server is up and running
 app.get('/', (req, res) => {
-  res.send('Backend is running!');
+  res.send('Backend is running2222!');
 });
 
 // Serve static files (if needed)
