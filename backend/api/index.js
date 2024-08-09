@@ -23,7 +23,7 @@ const app = express();
 
 // CORS configuration
 const corsOptions = {
-  origin: 'https://blog-blast-v2.vercel.app', // Remove trailing slash
+  origin: 'https://blog-blast-v2-frontend.vercel.app/', // Remove trailing slash
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
