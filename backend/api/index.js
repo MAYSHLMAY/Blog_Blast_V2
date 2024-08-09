@@ -31,7 +31,7 @@ const __dirname = path.resolve();
 const app = express();
 
 const corsOptions = {
-  origin: 'https://blog-blast-v2-83v3.vercel.app/', 
+  origin: 'https://blog-blast-v2.vercel.app/', 
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
