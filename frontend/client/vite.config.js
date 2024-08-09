@@ -11,7 +11,6 @@ export default defineConfig({
       '/api': {
         target: 'https://blog-blast-v2-backend.onrender.com',
         secure: false,
-        changeOrigin: false,
       },
     },
   },
