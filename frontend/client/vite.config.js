@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://blog-blast-v2-backend.vercel.app',
+        target: 'https://blog-blast-v2-backend.onrender.com/',
         secure: false,
       },
     },
