@@ -7,57 +7,54 @@ import authRoutes from './routes/auth.route.js';
 import postRoutes from './routes/post.route.js';
 import commentRoutes from './routes/comment.route.js';
 import notificationRoutes from './routes/notification.route.js';
-
-
 import cookieParser from 'cookie-parser';
 import path from 'path';
 
-
-
-
 dotenv.config();
 
+// Connect to MongoDB
 mongoose
   .connect(process.env.MONGO)
-  .then(() => {
-    console.log('MongoDb is connected');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+  .then(() => console.log('MongoDB is connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 const __dirname = path.resolve();
-
 const app = express();
 
+// CORS configuration
 const corsOptions = {
-  origin: 'https://blog-blast-v2.vercel.app/', 
+  origin: 'https://blog-blast-v2.vercel.app', // Remove trailing slash
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 app.use(cors(corsOptions));
-
 app.use(express.json());
 app.use(cookieParser());
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000!');
+// Simple route to test server is up and running
+app.get('/', (req, res) => {
+  res.send('Backend is running!');
 });
 
+// Serve static files (if needed)
+app.use(express.static(path.join(__dirname, 'client', 'dist')));
+
+// API routes
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/comment', commentRoutes);
 
-app.use(express.static(path.join(__dirname, '/client/dist')));
-
+// Catch-all route for serving frontend (if needed)
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 });
 
+// Error handling middleware
 app.use((err, req, res, next) => {
+  console.error(err); // Log error for debugging
   const statusCode = err.statusCode || 500;
   const message = err.message || 'Internal Server Error';
   res.status(statusCode).json({
@@ -65,4 +62,10 @@ app.use((err, req, res, next) => {
     statusCode,
     message,
   });
+});
+
+// Set port from environment variable or default to 3000
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}!`);
 });
