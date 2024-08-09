@@ -3,7 +3,7 @@
   "name": "blogBlast",
   "builds": [
     {
-      "src": "backend/index.js",
+      "src": "backend/api/index.js",
       "use": "@vercel/node"
     },
     {
